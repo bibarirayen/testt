@@ -34,6 +34,17 @@ public class Annonce {
     public Annonce() {
     }
 
+    public Annonce(societe byId, String description, String localisation, String nom, Long prix, String type) {
+        this.societe = byId;
+        this.description = description;
+        this.date_poste=LocalDate.now();
+        this.localisation=localisation;
+        this.nomannonce=nom;
+        this.salaire=prix;
+        this.type = type;
+
+    }
+
     public String getType() {
         return type;
     }

@@ -1,5 +1,7 @@
 package com.projetintegration.projetintegration.service;
 
+import com.projetintegration.projetintegration.DTO.AnnonceDTO;
+import com.projetintegration.projetintegration.DTO.PostuleDTO;
 import com.projetintegration.projetintegration.DTO.PostulerDTO;
 import com.projetintegration.projetintegration.entity.Utilisateur;
 import com.projetintegration.projetintegration.entity.Annonce;
@@ -9,6 +11,9 @@ import com.projetintegration.projetintegration.repository.PostulerRepository;
 import com.projetintegration.projetintegration.repository.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PostulerService {
@@ -39,5 +44,19 @@ public class PostulerService {
             return "non";
         }
 
+    }
+    public List<PostuleDTO> getAll(Long id) {
+        List<postuler> postuler = postulerRepository.findAllByUtilisateur_Id(id);
+        List<PostuleDTO> postuleDTOS = new ArrayList<>();
+        for (postuler post : postuler) {
+            postuleDTOS.add(new PostuleDTO(
+                    post.getId_postuler(),
+                    post.getAnnonce().getSociete().getNom(),
+                    post.getStatus(),
+                    post.getAnnonce().getSociete().getProfilePic(),
+                    post.getAnnonce().getNomannonce()
+            ));
+        }
+        return postuleDTOS;
     }
 }

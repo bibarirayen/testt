@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/UtilAct")
@@ -36,6 +38,26 @@ public class UtilisateurController {
             loginResponseDTO.setProfilepic(utilisateur.getProfilepic());
             return ResponseEntity.ok(loginResponseDTO);
         } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/login2/{id}")
+    public ResponseEntity<?> login2(@PathVariable Long id) {
+
+
+            Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
+            if(utilisateur.isPresent()) {
+                LoginResponseDTO loginResponseDTO = new LoginResponseDTO();
+                Utilisateur utilisateur1 = utilisateur.get();
+                loginResponseDTO.setToken(JwtTokenUtil.generateToken(utilisateur1));
+                loginResponseDTO.setEmail(utilisateur1.getEmail());
+                loginResponseDTO.setRole(utilisateur1.getRole());
+                loginResponseDTO.setId(utilisateur1.getId());
+                loginResponseDTO.setProfilepic(utilisateur1.getProfilepic());
+                return ResponseEntity.ok(loginResponseDTO);
+            }
+         else {
             return ResponseEntity.notFound().build();
         }
     }
@@ -87,5 +109,32 @@ public class UtilisateurController {
          else {
             return ResponseEntity.notFound().build();
         }
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/utilisateurs/{id}")
+    public Utilisateur getutil(@PathVariable Long id) {
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
+        utilisateur.get().setMdp(null);
+        return utilisateur.orElse(null);
+    }
+    @CrossOrigin(origins = "http://localhost:4200")
+    @PutMapping("/modifier/{id}")
+    public ResponseEntity<?> modifier(@PathVariable Long id, @RequestBody Utilisateur updatedutilisateur) {
+        Optional<Utilisateur> utilisateur = utilisateurRepository.findById(id);
+        if(utilisateur.isPresent()) {
+            Utilisateur nv = utilisateur.get();
+            nv.setNom(updatedutilisateur.getNom());
+            nv.setPrenom(updatedutilisateur.getPrenom());
+            nv.setTel(updatedutilisateur.getTel());
+            nv.setEmail(updatedutilisateur.getEmail());
+            if(updatedutilisateur.getMdp() != null) {
+                nv.setMdp(updatedutilisateur.getMdp());
+
+            }
+            nv.setProfilepic(updatedutilisateur.getProfilepic());
+            utilisateurRepository.save(nv);
+            return ResponseEntity.ok("");
+        }
+        return  ResponseEntity.notFound().build();
     }
 }

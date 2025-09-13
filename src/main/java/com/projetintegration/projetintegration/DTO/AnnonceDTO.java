@@ -1,18 +1,46 @@
 package com.projetintegration.projetintegration.DTO;
 
+import java.util.Date;
+
 public class AnnonceDTO {
     private Long id_societe;
     private String description;
     private String nom;
     private String localisation;
     private String societeName;
-
+    private Long prix;
+    private String type;
+    private Date date;
     public AnnonceDTO(Long id_societe, String description, String nom, String localisation, String societeName) {
         this.id_societe = id_societe;
         this.description = description;
         this.nom = nom;
         this.localisation = localisation;
         this.societeName = societeName;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Long getPrix() {
+        return prix;
+    }
+
+    public void setPrix(Long prix) {
+        this.prix = prix;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getSocieteName() {

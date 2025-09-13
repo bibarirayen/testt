@@ -9,7 +9,7 @@ public class postuler {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_postuler", nullable = false)
-    private Long id_postuler;
+    private Long idpostuler;
 
     @ManyToOne
     @JoinColumn (name = "id_utilisateur", nullable = false)
@@ -27,6 +27,10 @@ public class postuler {
 
     @Column (name = "status", nullable = false)
     private String status;
+
+    public postuler() {
+
+    }
 
     public String getStatus() {
         return status;
@@ -58,11 +62,11 @@ public class postuler {
     }
 
     public Long getId_postuler() {
-        return id_postuler;
+        return idpostuler;
     }
 
     public void setId_postuler(Long id_postuler) {
-        this.id_postuler = id_postuler;
+        this.idpostuler = id_postuler;
     }
 
     public Utilisateur getUtilisateur() {
