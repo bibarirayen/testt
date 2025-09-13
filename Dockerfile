@@ -7,6 +7,9 @@ WORKDIR /app
 # Copie tout le projet dans l'image Docker
 COPY . .
 
+# Donner les permissions d'exécution au script mvnw
+RUN chmod +x mvnw
+
 # Build le projet
 RUN ./mvnw clean package -DskipTests
 
