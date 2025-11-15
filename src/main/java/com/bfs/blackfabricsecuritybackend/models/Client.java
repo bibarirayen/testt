@@ -19,6 +19,7 @@ public class Client {
 
     private Double latitude;
     private Double longitude;
+    @Column(name = "client_range")   // 🔥 FIX: avoid MySQL keyword "range"
     private double range;
     private boolean sendIncidents=false;
 
