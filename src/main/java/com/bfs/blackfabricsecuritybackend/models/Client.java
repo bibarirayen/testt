@@ -19,10 +19,10 @@ public class Client {
 
     private Double latitude;
     private Double longitude;
-
+    private double range;
     private boolean sendIncidents;
 
-    public Client(Long id, String name, String email, String phone, String zipCode, String address, Double latitude, Double longitude, boolean sendIncidents) {
+    public Client(Long id, String name, String email, String phone, String zipCode, String address, Double latitude, Double longitude, boolean sendIncidents, Double range) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -32,6 +32,15 @@ public class Client {
         this.latitude = latitude;
         this.longitude = longitude;
         this.sendIncidents = sendIncidents;
+        this.range = range;
+    }
+
+    public double getRange() {
+        return range;
+    }
+
+    public void setRange(double range) {
+        this.range = range;
     }
 
     public Client() {

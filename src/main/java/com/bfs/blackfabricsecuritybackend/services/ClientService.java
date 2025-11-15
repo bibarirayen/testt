@@ -35,6 +35,7 @@ public class ClientService {
             existing.setLatitude(client.getLatitude());
             existing.setLongitude(client.getLongitude());
             existing.setSendIncidents(client.isSendIncidents());
+            existing.setRange(client.getRange());
             return repo.save(existing);
         } else {
             throw new RuntimeException("Client not found with id: " + id);
