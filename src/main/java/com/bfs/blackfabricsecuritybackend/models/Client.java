@@ -20,7 +20,7 @@ public class Client {
     private Double latitude;
     private Double longitude;
     private double range;
-    private boolean sendIncidents;
+    private boolean sendIncidents=false;
 
     public Client(Long id, String name, String email, String phone, String zipCode, String address, Double latitude, Double longitude, boolean sendIncidents, Double range) {
         this.id = id;
